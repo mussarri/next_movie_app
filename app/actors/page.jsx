@@ -6,19 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import style from "./style.module.css";
 
-const searchPeople = async () => {
-  const url =
-    "https://api.themoviedb.org/3/search/person?include_adult=false&language=en-US&page=1";
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYmQ4Y2Q3NTFiYzExZmVlYzlhNmNjMzJjMGExMmYxOCIsInN1YiI6IjY0ZDM5YWE3ZDEwMGI2MDEzOTViMjkyMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UkttgYSxtHequR7MOULzbEF-dQGjRUCLCkctQDohls0",
-    },
-  };
-  const res = await fetch(url, options);
-};
+
 
 async function page() {
   const data = await getPopularActors();

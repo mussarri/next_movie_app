@@ -33,8 +33,7 @@ function MovieSlider({ list, title }) {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYmQ4Y2Q3NTFiYzExZmVlYzlhNmNjMzJjMGExMmYxOCIsInN1YiI6IjY0ZDM5YWE3ZDEwMGI2MDEzOTViMjkyMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UkttgYSxtHequR7MOULzbEF-dQGjRUCLCkctQDohls0",
+        Authorization: "Bearer " + process.env.API_KEY,
       },
     };
 
