@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
 import fetch from "node-fetch";
+import { getMultipleRandom } from "@/utils";
 
 const settings = {
   dots: false,
@@ -33,24 +34,34 @@ async function CategorySlider() {
 
   return (
     <>
-      <div className="my-10 p-10 w-full">
-        <h1 className="text-3xl">Categories</h1>
-        <div className="mt-5 flex flex-wrap">
+      <div className="mt-14 px-14 w-full">
+        <div className="flex flex-wrap">
           {data?.genres &&
-            data.genres.map((item) => (
-              <div className="h-13 p-4">
+            getMultipleRandom(data.genres, 6).map((item) => (
+              <div className="h-13 px-3 py-1 mx-auto">
                 <Link
                   href={{
                     pathname: "/category/" + item.name.toLowerCase(),
                     query: { id: item.id },
                   }}
                 >
-                  <div className="bg-gray-900 rounded p-2 px-4 text-center align-baseline">
+                  <div className="bg-gray-900 rounded-full p-3 px-10 text-lg text-center align-baseline text-gray-400 hover:text-white">
                     {item.name}
                   </div>
                 </Link>
               </div>
             ))}
+          <div className="h-13 px-3 py-1 mx-auto">
+            <Link
+              href={{
+                pathname: "/category/all",
+              }}
+            >
+              <div className="bg-gray-900 rounded-full p-3 px-10 text-lg text-center align-baseline text-gray-400">
+                Other
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </>

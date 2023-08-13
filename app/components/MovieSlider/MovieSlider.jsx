@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import style from "./movieslider.module.css";
+import { date } from "@/utils";
 
 const settings = {
   dots: false,
@@ -25,7 +26,6 @@ const settings = {
 
 function MovieSlider({ list, title }) {
   const [data, setData] = useState();
-  console.log(list);
 
   useEffect(() => {
     const url = `https://api.themoviedb.org/3/movie/${list}?language=en-US&page=1`;
@@ -33,7 +33,7 @@ function MovieSlider({ list, title }) {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: "Bearer " + process.env.API_KEY,
+        Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_KEY2,
       },
     };
 
@@ -43,13 +43,13 @@ function MovieSlider({ list, title }) {
   }, []);
 
   return (
-    <div className="px-10 mt-10">
+    <div className={style.slider + " px-14 mt-10 mx-auto"}>
       <h2 className="p-21 text-3xl">{title} Movies</h2>
       <div className="my-5 w-full">
         <Slider {...settings}>
           {data?.results
             ? data.results.map((item) => (
-                <Link href={"/movie" + item.id}>
+                <Link href={"/movie/" + item.id}>
                   <div className={style.movie}>
                     <Image
                       unoptimized
@@ -58,10 +58,10 @@ function MovieSlider({ list, title }) {
                       alt="image"
                       src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
                     />
-                    <div className="absolute bottom-0 left-0 w-full py-5 px-2 bg-gradient-to-t from-black to-transparent text-md">
+                    <div className="absolute bottom-0 left-0 w-full py-5 px-2 bg-gradient-to-t from-black to-transparent pt-2 text-md">
                       <p>{item.title}</p>
                       <div className="flex justify-between text-lg">
-                        <p>{item.release_date.split("-")[0]}</p>
+                        <p>{date(item.release_date)}</p>
                         <p>
                           {item.vote_average}
                           <span className="text-xs">/10</span>

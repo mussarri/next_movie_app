@@ -3,14 +3,9 @@ import Link from "next/link";
 import fetch from "node-fetch";
 import React from "react";
 import style from "./style.module.css";
+import { slugify } from "@/utils";
 
-export const slugify = (str) =>
-  str
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/[\s_-]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+
 
 export const getPopularActors = async () => {
   const url =
@@ -28,12 +23,11 @@ export const getPopularActors = async () => {
 
 async function PopularActors() {
   const data = await getPopularActors();
-  console.log(data.results);
   return (
     <div className="px-10 mt-10">
       <h1 className="p-21 mb-10 text-3xl">Popular Actors</h1>
       <div className="grid grid-cols-8 gap-4">
-        {data.results.slice(0, 16).map((actor, i) => (
+        {data?.results?.slice(0, 16).map((actor, i) => (
           <Link href={"/actors/" + slugify(actor.name)}>
             <div className={style.actor + " relative"}>
               <Image

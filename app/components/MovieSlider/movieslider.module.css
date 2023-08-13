@@ -1,3 +1,8 @@
+.slider{
+  max-height:450px;
+  overflow: hidden;
+}
+
 .movie {
   position: relative;
   padding: 12px;

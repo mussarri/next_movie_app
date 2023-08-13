@@ -1,18 +1,13 @@
 import React from "react";
 import style from "./hero.module.css";
-
-const upperCase = (item) => {
-  return item.charAt(0).toUpperCase() + item.slice(1);
-};
-
-upperCase("horror");
+import { upperCase } from "@/utils";
 
 function Hero({ isHome, title }) {
   return (
     <div className={style.hero + (isHome ? " h-144" : " h-96")}>
       <div className="absolute py-5 z-10 top-36 w-full">
         {isHome ? (
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto ">
             <h1 className="text-5xl">Unlimited movies,</h1>
             <h1 className="text-5xl mt-3">TV shows, and more</h1>
             <h6 className="text-md mt-3">

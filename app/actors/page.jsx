@@ -1,12 +1,25 @@
 import Hero from "@/app/components/Hero/Hero";
 import fetch from "node-fetch";
 import React from "react";
-import { getPopularActors, slugify } from "../components/PopularActors";
+import { getPopularActors } from "../components/PopularActors";
 import Image from "next/image";
 import Link from "next/link";
 import style from "./style.module.css";
+import { slugify } from "@/utils";
 
-
+const searchPeople = async () => {
+  const url =
+    "https://api.themoviedb.org/3/search/person?include_adult=false&language=en-US&page=1";
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer " + process.env.API_KEY,
+    },
+  };
+  const res = await fetch(url, options);
+};
 
 async function page() {
   const data = await getPopularActors();

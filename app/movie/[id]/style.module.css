@@ -1,5 +1,4 @@
 .hero {
-  background-image: url(https://cdn.pixabay.com/photo/2013/03/08/05/28/filmstrip-91434_1280.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
@@ -14,4 +13,9 @@
   position: absolute;
   background: #000;
   opacity: 0.7;
+}
+
+.hero > div{
+    top: 50%;
+    transform: translateY(-40%);
 }
