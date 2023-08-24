@@ -14,7 +14,7 @@ export default async function Home() {
       <MovieSlider list={"popular"} title={"Popular"} />
       <MovieSlider list={"top_rated"} title={"Top Rated"} />
       
-      {/* <PopularActors /> */}
+      <PopularActors />
     </>
   );
 }

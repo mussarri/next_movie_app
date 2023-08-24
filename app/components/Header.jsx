@@ -26,11 +26,11 @@ function Header() {
         (scrollPosition > 50 ? " bg-gray-900" : " bg-transparent")
       }
     >
-      <div className="flex justify-between items-center max-w-7xl px-2 mx-auto">
+      <div className="px-14 flex justify-between items-center max-w-7xl mx-auto">
         <Link href={"/"}>
           <div className="logo text-3xl text-red-600 font-bold">MOVIE APP</div>
         </Link>
-        <div className="flex rounded gap-5 bg-black">
+        <div className="flex rounded gap-5 bg-black/50">
           <span className="p-2">
             <SearchIcon />
           </span>

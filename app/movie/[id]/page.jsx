@@ -24,7 +24,9 @@ async function page({ params }) {
     <div
       className={style.hero + " h-144"}
       style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})`,
+        backgroundImage: movie.backdrop_path
+          ? `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})`
+          : "url(https://cdn.pixabay.com/photo/2013/03/08/05/28/filmstrip-91434_1280.jpg)",
       }}
     >
       <div className="absolute py-5 z-10 w-full">
@@ -35,8 +37,12 @@ async function page({ params }) {
             </h1>
 
             <p className="p-2 mt-3 text-3xl">
-              <Rating name="read-only" value={movie.vote_average / 2} readOnly /> 
-              <span className="ml-2">{movie.vote_average}</span>
+              <Rating
+                name="read-only"
+                value={movie.vote_average / 2}
+                readOnly
+              />
+              <span className="ml-2">{movie.vote_average.toFixed(1)}</span>
             </p>
             <p className="mt-3 p-2 text-gray-400">{movie.overview}</p>
             <div className="m-2">

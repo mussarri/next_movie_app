@@ -4,6 +4,7 @@ import fetch from "node-fetch";
 import React from "react";
 import style from "../../components/MovieSlider/movieslider.module.css";
 import Hero from "@/app/components/Hero/Hero.jsx";
+import { titleize } from "@/utils";
 
 const getMovieByCategory = async (id) => {
   const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${id}`;
@@ -23,11 +24,11 @@ async function page({ params, searchParams }) {
 
   return (
     <>
-      <Hero isHome={false} title={params.slug + " Movies"} />
-      <div className="pt-10 px-3">
-        <div className="flex flex-wrap">
+      <Hero isHome={false} title={titleize(params.slug) + " Movies"} />
+      <div className="pt-10 max-w-6xl mx-auto">
+        <div className="flex flex-wrap ">
           {data.results.map((item) => (
-            <Link href="">
+            <Link href={"/movie/" + item.id}>
               <div className={style.movie}>
                 <Image
                   unoptimized

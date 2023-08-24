@@ -3,9 +3,6 @@ import Link from "next/link";
 import fetch from "node-fetch";
 import React from "react";
 import style from "./style.module.css";
-import { slugify } from "@/utils";
-
-
 
 export const getPopularActors = async () => {
   const url =
@@ -24,11 +21,30 @@ export const getPopularActors = async () => {
 async function PopularActors() {
   const data = await getPopularActors();
   return (
-    <div className="px-10 mt-10">
-      <h1 className="p-21 mb-10 text-3xl">Popular Actors</h1>
-      <div className="grid grid-cols-8 gap-4">
-        {data?.results?.slice(0, 16).map((actor, i) => (
-          <Link href={"/actors/" + slugify(actor.name)}>
+    <div className="px-14 mt-20 mx-auto max-w-7xl">
+      <div className="grid grid-cols-7 gap-4">
+        <div className="col-span-2 pt-10 p-2">
+          <div className="bg-gray-900 p-3 h-full flex flex-col gap-1">
+            <p className="text-5xl text-red-600">Top 10</p>
+            <p className="text-3xl font-bold">Hollywood Actors</p>
+            <p className="text-sm text-gray-400 ">
+              in this{" "}
+              <span className=" decoration-red-600 decoration-solid decoration-1 underline">
+                month
+              </span>
+            </p>
+            <div className="text-right">
+              <Link
+                href={"/actors"}
+                className="outline outline-offset-2 outline-1 text-sm px-2 text-right"
+              >
+                view all
+              </Link>
+            </div>
+          </div>
+        </div>
+        {data?.results?.slice(0, 10).map((actor, i) => (
+          <Link href={"/actors/" + actor.id}>
             <div className={style.actor + " relative"}>
               <Image
                 unoptimized
@@ -43,9 +59,19 @@ async function PopularActors() {
             </div>
           </Link>
         ))}
-      </div>
-      <div className="my-5 text-right">
-        <Link href={"/actors"}>Show more</Link>
+        <div className="col-span-2">
+          <div
+            className="text-center top-2/4 left-2/4 relative"
+            style={{ transform: "translate(-50%, -50%)" }}
+          >
+            <Link
+              href={"/actors"}
+              className="text-xl outline outline-offset-1 outline-1 text-sm px-4 py-2 text-right"
+            >
+              view all
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

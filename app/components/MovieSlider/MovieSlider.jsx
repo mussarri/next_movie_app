@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import fetch from "node-fetch";
-import Image from "next/image";
-import Link from "next/link";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import style from "./movieslider.module.css";
-import { date } from "@/utils";
+
+import Movie from "../Movie";
 
 const settings = {
   dots: false,
@@ -33,7 +33,7 @@ function MovieSlider({ list, title }) {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_KEY2,
+        Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_KEY,
       },
     };
 
@@ -43,34 +43,12 @@ function MovieSlider({ list, title }) {
   }, []);
 
   return (
-    <div className={style.slider + " px-14 mt-10 mx-auto"}>
+    <div className={style.slider + " px-14 mt-10 mx-auto max-w-7xl"}>
       <h2 className="p-21 text-3xl">{title} Movies</h2>
       <div className="my-5 w-full">
         <Slider {...settings}>
           {data?.results
-            ? data.results.map((item) => (
-                <Link href={"/movie/" + item.id}>
-                  <div className={style.movie}>
-                    <Image
-                      unoptimized
-                      width={200}
-                      height={200}
-                      alt="image"
-                      src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
-                    />
-                    <div className="absolute bottom-0 left-0 w-full py-5 px-2 bg-gradient-to-t from-black to-transparent pt-2 text-md">
-                      <p>{item.title}</p>
-                      <div className="flex justify-between text-lg">
-                        <p>{date(item.release_date)}</p>
-                        <p>
-                          {item.vote_average}
-                          <span className="text-xs">/10</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))
+            ? data.results.map((item) => <Movie item={item} />)
             : Array(10)
                 .fill(0)
                 .map((item) => (
